@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+	/* Light theme — refined neutrals with subtle warmth.
+	 * Accent: Postgres-leaning indigo/blue, slightly desaturated. */
+	--color-bg: #fafafa;
+	--color-surface: #ffffff;
+	--color-surface-2: #f4f5f7;
+	--color-surface-3: #ebecf0;
+	--color-border: #e7e8ec;
+	--color-border-strong: #d4d6dc;
+	--color-fg: #14151a;
+	--color-fg-strong: #0a0a0d;
+	--color-fg-muted: #6a6d76;
+	--color-fg-subtle: #9a9da6;
+	--color-accent: #4f46e5;
+	--color-accent-2: #6366f1;
+	--color-accent-soft: #eef2ff;
+	--color-accent-fg: #ffffff;
+	--color-ok: #15803d;
+	--color-ok-soft: #ecfdf5;
+	--color-warn: #b45309;
+	--color-warn-soft: #fffbeb;
+	--color-err: #b91c1c;
+	--color-err-soft: #fef2f2;
+	--color-info: #0e7490;
+	--color-info-soft: #ecfeff;
+
+	--radius-xs: 4px;
+	--radius-sm: 6px;
+	--radius-md: 8px;
+	--radius-lg: 12px;
+
+	--shadow-xs: 0 1px 0 rgba(20, 21, 26, 0.04);
+	--shadow-sm: 0 1px 2px rgba(20, 21, 26, 0.05), 0 1px 1px rgba(20, 21, 26, 0.03);
+	--shadow-md: 0 4px 16px -4px rgba(20, 21, 26, 0.08), 0 2px 4px -2px rgba(20, 21, 26, 0.04);
+	--shadow-lg: 0 16px 40px -12px rgba(20, 21, 26, 0.14), 0 4px 8px -4px rgba(20, 21, 26, 0.06);
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+	background: var(--color-bg);
+	color: var(--color-fg);
+	font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	font-feature-settings: "ss01", "cv11", "cv02";
+	font-size: 13.5px;
+	line-height: 1.5;
+	letter-spacing: -0.005em;
+	margin: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 { letter-spacing: -0.015em; }
+
+code, kbd, .font-mono {
+	font-family: "JetBrains Mono", "SF Mono", ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+	font-feature-settings: "calt", "ss01";
+	font-size: 0.92em;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: 6px; border: 2px solid var(--color-bg); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-fg-subtle); }
+
+::selection { background: color-mix(in oklab, var(--color-accent) 22%, transparent); color: var(--color-fg-strong); }
+
+/* Subtle background grid pattern for empty surfaces. */
+.bg-dotgrid {
+	background-image: radial-gradient(circle at 1px 1px, var(--color-border-strong) 1px, transparent 0);
+	background-size: 16px 16px;
+}
+
+/* Pinned controls scroll — active-card styling. Toggled imperatively from
+   PinnedControlsScroll as scroll progress lands on each card. */
+.control-card.is-active { border-color: var(--color-border-strong); }
+.control-card.is-active .control-icon {
+	background: var(--color-accent-soft);
+	color: var(--color-accent);
+}
+.control-card.is-active .control-rail { opacity: 1; }
+
+/* Audit timeline pins (AuditTimeline). The active pin grows, its label
+   shifts to the strong fg colour, and its detail card swaps in. */
+.audit-pin-dot { transition: transform 200ms ease, background 200ms ease, border-color 200ms ease; }
+.audit-pin.is-active .audit-pin-dot {
+	transform: translateY(-6px) scale(1.45);
+	background: var(--color-accent);
+	border-color: var(--color-accent);
+}
+.audit-pin.is-active .audit-pin-icon { opacity: 1; color: white; }
+.audit-pin.is-active .audit-pin-label { color: var(--color-accent); }
+.audit-pin.is-active .audit-pin-name { color: var(--color-fg-strong); }
+.audit-detail { opacity: 0; pointer-events: none; transform: translateY(8px); }
+.audit-detail.is-active { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+/* Animated pulse for live indicators (used by status pills). */
+@keyframes pgm-pulse {
+	0%, 100% { opacity: 1; transform: scale(1); }
+	50% { opacity: 0.55; transform: scale(0.92); }
+}
+.pulse-dot { animation: pgm-pulse 1.6s ease-in-out infinite; }

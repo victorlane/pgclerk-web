@@ -1,0 +1,32 @@
+{
+	"name": "pgclerk-web",
+	"version": "0.1.0",
+	"private": true,
+	"description": "pgclerk.com — public marketing site. Operator and customer consoles live in a separate app.",
+	"type": "module",
+	"scripts": {
+		"dev": "next dev -p 3001",
+		"build": "next build",
+		"start": "next start -p 3001",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"clsx": "^2.1.1",
+		"gsap": "3.15.0",
+		"lenis": "1.3.23",
+		"lucide-react": "^0.469.0",
+		"next": "^15.1.5",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"tailwind-merge": "^2.6.0"
+	},
+	"devDependencies": {
+		"@tailwindcss/postcss": "^4.0.0",
+		"@types/node": "^22.10.5",
+		"@types/react": "^19.0.7",
+		"@types/react-dom": "^19.0.3",
+		"postcss": "^8.5.1",
+		"tailwindcss": "^4.0.0",
+		"typescript": "^5.7.3"
+	}
+}
