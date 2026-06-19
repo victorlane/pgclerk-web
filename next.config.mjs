@@ -2,8 +2,10 @@
 const config = {
 	// pgclerk.com is statically renderable end-to-end — no API, no
 	// authenticated data fetches, no per-visitor personalisation.
-	// Keep `output` unset so we can still use ISR / on-demand revalidation
-	// if and when we add an MDX content layer.
+	// `output: 'standalone'` trims the deploy image to just
+	// `.next/standalone` + `.next/static` (+ `public/` when it exists),
+	// which is what the Dockerfile copies into the runtime stage.
+	output: 'standalone',
 	poweredByHeader: false
 }
 export default config
